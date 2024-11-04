@@ -38,7 +38,7 @@ pip install pygame
 ```
 
 Keep in mind that is better to run all this commands in a terminal located in the folder where your this repository is on your PC,
-Then you will need to use the following command to run the program:
+Then you will need to use the following command to run the program (this is necesary to be located in the same path that is your program):
 
 ```
 python 01_hello_world.py
@@ -56,7 +56,7 @@ pip install PyGLM==2.7.3
 ```
 
 Keep in mind that is better to run all this commands in a terminal located in the folder where your this repository is on your PC,
-Then you will need to use the following command to run the program:
+Then you will need to use the following command to run the program (this is necesary to be located in the same path that is your program):
 
 ```
 python 06_multiple_objects.py
