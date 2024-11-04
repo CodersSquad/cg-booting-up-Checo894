@@ -19,8 +19,12 @@ class ImageTexture:
         self.ctx = moderngl.get_context()
 
         img = Image.open(path).convert('RGBA')
+        img = img.resize((512, 512))
         self.texture = self.ctx.texture(img.size, 4, img.tobytes())
         self.sampler = self.ctx.sampler(texture=self.texture)
+        self.texture.repeat_x = True
+        self.texture.repeat_y = True
+
 
     def use(self):
         self.sampler.use()
@@ -106,12 +110,12 @@ class Scene:
             ''',
         )
 
-        self.texture = ImageTexture('examples/data/textures/crate.png')
+        self.texture = ImageTexture('Tecnologico_de_Monterrey.png')
 
-        self.car_geometry = ModelGeometry('examples/data/models/lowpoly_toy_car.obj')
+        self.car_geometry = ModelGeometry('Car.obj')
         self.car = Mesh(self.program, self.car_geometry)
 
-        self.crate_geometry = ModelGeometry('examples/data/models/crate.obj')
+        self.crate_geometry = ModelGeometry('Crate.obj')
         self.crate = Mesh(self.program, self.crate_geometry, self.texture)
 
     def camera_matrix(self):
@@ -130,7 +134,7 @@ class Scene:
         self.program['camera'].write(camera)
 
         self.car.render((-0.4, 0.0, 0.0), (1.0, 0.0, 0.0), 0.2)
-        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.2)
+        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.0003)
         self.car.render((0.4, 0.0, 0.0), (0.0, 0.0, 1.0), 0.2)
 
 
