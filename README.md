@@ -20,17 +20,68 @@ This lab stands to prepare the moderngl development environment. Below the steps
 
 ## How to run your program
 
-```
-# Update this section with instructions on how to run your programs. 
+### Python Installation
 
-# Consider that these instructions will be executed 
-in a completely new linux-based machine (Ubuntu 22.04),
-so, instructions for dependencies installation must be added.
+As a first requirement, you will need to install Python on your operating system, whichever it is. You can find multiple downloading links for these here>
 
-# It's highly recommended to use python virtual envs. 
-You may take a look on:
-https://docs.python.org/3/library/venv.html
+- [https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+After downloading, be sure to follow all the instructions from the Installing Wizard and then, restarting your PC to succesfully complete the installation and be able to run the Python environment.
+
+### 01_hello_world.py
+
+In order to run this first program, you will need to install the following dependencies:
+
 ```
+pip install moderngl
+pip install pygame
+```
+
+Keep in mind that is better to run all this commands in a terminal located in the folder where your this repository is on your PC,
+Then you will need to use the following command to run the program:
+
+```
+python 01_hello_world.py
+```
+
+### 06_multiple_objects.py
+
+In order to run this second program, you will need to install the following dependencies:
+
+```
+pip install moderngl
+pip install pygame
+pip install numpy
+pip install PyGLM==2.7.3
+```
+
+Keep in mind that is better to run all this commands in a terminal located in the folder where your this repository is on your PC,
+Then you will need to use the following command to run the program:
+
+```
+python 06_multiple_objects.py
+```
+
+### 09_models_and_images.py
+
+In order to run this second program, you will need to install the following dependencies:
+
+```
+pip install moderngl
+pip install pygame
+pip install pillow
+pip install PyGLM==2.7.3
+pip install pywavefront
+```
+
+Keep in mind that is better to run all this commands in a terminal located in the folder where your this repository is on your PC.
+Then you will need to use the following command to run the program (this is necesary to be located in the same path that is your program):
+
+```
+python 09_models_and_images.py
+```
+
+*NOTE: This 'happy path' was created, scripted, tested and ran in a Windows 11 OS environment*
 
 ## Grading Policy
 
