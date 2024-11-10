@@ -5,6 +5,7 @@ import sys
 import glm
 import moderngl
 import pygame
+import numpy as np
 from objloader import Obj
 from PIL import Image
 
@@ -71,6 +72,7 @@ class Scene:
                 uniform mat4 camera;
                 uniform vec3 position;
                 uniform float scale;
+                uniform mat2 uv_transform; // Matriz para transformar las coordenadas UV
 
                 layout (location = 0) in vec3 in_vertex;
                 layout (location = 1) in vec3 in_normal;
@@ -83,10 +85,10 @@ class Scene:
                 void main() {
                     v_vertex = position + in_vertex * scale;
                     v_normal = in_normal;
-                    v_uv = in_uv;
-
+                    v_uv = uv_transform * in_uv; // Aplicar transformación
                     gl_Position = camera * vec4(v_vertex, 1.0);
                 }
+
             ''',
             fragment_shader='''
                 #version 330 core
@@ -110,12 +112,12 @@ class Scene:
             ''',
         )
 
-        self.texture = ImageTexture('Tecnologico_de_Monterrey.png')
+        self.texture = ImageTexture('tecLogo.jpg')
 
-        self.car_geometry = ModelGeometry('Car.obj')
+        self.car_geometry = ModelGeometry('lowpoly_toy_car.obj')
         self.car = Mesh(self.program, self.car_geometry)
 
-        self.crate_geometry = ModelGeometry('Crate.obj')
+        self.crate_geometry = ModelGeometry('crate.obj')
         self.crate = Mesh(self.program, self.crate_geometry, self.texture)
 
     def camera_matrix(self):
@@ -134,11 +136,20 @@ class Scene:
         self.program['camera'].write(camera)
 
         self.car.render((-0.4, 0.0, 0.0), (1.0, 0.0, 0.0), 0.2)
-        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.0003)
+        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.2)
         self.car.render((0.4, 0.0, 0.0), (0.0, 0.0, 1.0), 0.2)
 
-
 scene = Scene()
+
+# Rotar la textura 180 grados
+angle = np.radians(180)
+cos_a, sin_a = np.cos(angle), np.sin(angle)
+uv_transform = np.array([
+    [cos_a, -sin_a],
+    [sin_a, cos_a]
+], dtype='f4')
+
+scene.program['uv_transform'].write(uv_transform)
 
 while True:
     for event in pygame.event.get():
